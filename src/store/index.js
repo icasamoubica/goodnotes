@@ -21,7 +21,6 @@ export default new Vuex.Store({
   mutations: {
 
     editNote(state, editedNote) {
-      console.log('in editNote in store');
       for (let note of state.notes) {
         if (note.id == editedNote.id) {
           note.title = editedNote.title
@@ -31,7 +30,6 @@ export default new Vuex.Store({
       }
     },
     toggleEditMode(state, noteToEdit) {
-      console.log('in toggleEditMode in store');
       for (let note of state.notes) {
         if (note.id == noteToEdit.id) {
           note.edit = true
