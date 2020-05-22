@@ -18,6 +18,11 @@
             <textarea type="text" v-model="note.content"/>
         </div>
         <div class="buttons">
+            <div class="color"  v-for='singleColor of colors'
+                                v-bind:key='singleColor.color'
+                                v-bind:style="{'background-color' : singleColor }"
+                                v-on:click="setColor(note, singleColor)">
+            </div>
             <button class="save" v-on:click="saveNote(note)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M15.003 3h2.997v5h-2.997v-5zm8.997 1v20h-24v-24h20l4 4zm-19 5h14v-7h-14v7zm16 4h-18v9h18v-9z"/></svg>
             </button>
@@ -27,7 +32,13 @@
 </template>
 
 <script>
+import Colors from '@/assets/json/colors.json'
+
 export default {
+    data() {return {
+        colors : Colors.colors
+    }},
+
     props : {
         note : Object
     },
@@ -38,6 +49,9 @@ export default {
         },
         saveNote(note) {
             this.$store.commit('editNote', note)
+        },
+        setColor(note, color) {
+            this.$store.commit('setColor', {note, color})
         }
     }
 }
@@ -94,12 +108,29 @@ export default {
     font-weight: normal;
 }
 .buttons {
-    text-align: right;
+    padding-left: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     height: 15%;
 }
 .input, textarea, button {
     outline: none;
     background-color: inherit;
+}
+.color {
+    margin: 0;
+    height: 1.4rem;
+    width: 1.4rem;
+    border: 2px solid grey;
+    border-radius: 0.3rem;
+    margin-left: 0.3rem;
+    margin-bottom: 0.1rem;
+}
+button.save {
+    border: none;
+    margin-right: 0.3rem;
+    margin-bottom: 0.5rem;
 }
 .noDisplay {
     display: none;

@@ -50,6 +50,19 @@ export default new Vuex.Store({
         newNote.id = Math.max(...ids)+1
       }  
       state.notes.push(newNote)
+    },
+    setColor(state, payload) {
+      console.log('in setColor in store');
+      console.log(payload);
+      console.log('looking for note with id: ' + payload.note.id);
+      for (let note of state.notes) {
+        if (note.id == payload.note.id) {
+          console.log('found it!');
+          console.log('color before - ' + note.bgcolor);
+          note.bgcolor = payload.color
+          console.log('color after - ' + note.bgcolor);
+        }
+      }
     }
   },
   actions: {
