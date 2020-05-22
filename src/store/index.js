@@ -63,6 +63,9 @@ export default new Vuex.Store({
           console.log('color after - ' + note.bgcolor);
         }
       }
+    },
+    deleteAll(state) {
+      state.notes = []
     }
   },
   actions: {
