@@ -66,7 +66,12 @@ export default new Vuex.Store({
     },
     deleteAll(state) {
       state.notes = []
-    }
+    },
+    // stopEditing(state) {
+    //   console.log('stop editiong');
+      
+    //   state.notes.forEach(note => note.edit = false)
+    // }
   },
   actions: {
     

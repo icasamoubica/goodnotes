@@ -25,7 +25,7 @@
         </li>
       </ul>
     </div>
-    <div class="noteContainer" v-bind:class=" showGrid ? 'displayAsGrid' : 'displayAslist'">
+    <div class="noteContainer"  v-bind:class=" showGrid ? 'displayAsGrid' : 'displayAslist'">
       <note v-for='singleNote of getNotes'
             v-bind:key='singleNote.id'
             v-bind:note='singleNote'
@@ -77,7 +77,10 @@ export default {
     },
     cancelConfirmation() {
       this.renderDeleteConfirmation = false
-    }
+    },
+    // stopEditing() {
+    //   this.$store.commit('stopEditing')
+    // }
 
   }
 }
