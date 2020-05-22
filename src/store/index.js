@@ -9,7 +9,7 @@ export default new Vuex.Store({
   state: {
     notes : [],
 
-    newNote : {
+    protoNote : {
       "id" : Number,
       "title" : "Title",
       "content" : "Content",
@@ -23,7 +23,7 @@ export default new Vuex.Store({
     editNote(state, editedNote) {
       console.log('in editNote in store');
       for (let note of state.notes) {
-        if (note.id === editedNote.id) {
+        if (note.id == editedNote.id) {
           note.title = editedNote.title
           note.content = editedNote.content
           note.edit = false
@@ -36,7 +36,7 @@ export default new Vuex.Store({
         console.log(note.id)
         console.log(noteToEdit.id);
         
-        if (note.id === noteToEdit.id) {
+        if (note.id == noteToEdit.id) {
           console.log(note)
           note.edit = true
         }
@@ -46,22 +46,15 @@ export default new Vuex.Store({
       state.notes = state.notes.filter(note => note.id != id)
     },
     addNewNote(state) {
+      let newNote = Object.assign({}, state.protoNote)
       if (state.notes.length == 0) {
-        console.log('no notes');
-        state.newNote.id = 1
-        console.log('giving new note id' + state.newNote.id);
-        
+        newNote.id = 1
       } else {
         console.log('so many notes...');
         let ids = state.notes.map(note => note.id)
-        console.log('ids = ' + ids);
-        
-        state.newNote.id = Math.max(...ids)+1
-
-        console.log('new id = ' + state.newNote.id);
-        
+        newNote.id = Math.max(...ids)+1
       }  
-      state.notes.push(state.newNote)
+      state.notes.push(newNote)
     }
   },
   actions: {

@@ -1,6 +1,7 @@
 <template>
   <div class="note" v-bind:style="{'backgound-color' : note.bgcolor }">
-    <div class="normalView" v-bind:class="{noDisplay:note.edit}">
+    <div class="normalView" v-on:click="editNote(note)"
+                            v-bind:class="{noDisplay:note.edit}">
         <div class="title">
             <p>{{note.title}}</p>
         </div>
@@ -8,21 +9,18 @@
             <p>{{note.content}}</p>
         </div>
     </div>
-    <div class="editView" v-bind:class="{noDisplay:!note.edit}">
+    <div class="editView" :class="{noDisplay:!note.edit}">
         <div class="title">
             <input type="text" v-model="note.title">
         </div>
         <div class="content">
-            <input type="text" v-model="note.content">
+            <textarea type="text" v-model="note.content"/>
         </div>
-    </div>
-    <div class="buttons">
-        <button class="edit" v-on:click="editNote(note)">
-            EDIT
-        </button>
-        <button class="save" v-on:click="saveNote(note)">
-            SAVE
-        </button>
+        <div class="buttons">
+            <button class="save" v-on:click="saveNote(note)">
+                SAVE
+            </button>
+        </div>
     </div>
   </div>
 </template>
@@ -64,16 +62,29 @@ export default {
     height: 15%;
 }
 .title p, .title input {
+    word-wrap: break-word;
+    overflow: hidden;
     width: 100%;
     height: 100%;
     border: none;
 }
-p {
-    padding: 0;
+.content {
+    height: 75%;
+}
+.content p, .content textarea {
+    word-wrap: break-word;
+    width: 100%;
+    height: 100%;
+    border: none;
     margin: 0;
+    resize: none;
+    padding: 0;
 }
 .button {
     height: 10%;
+}
+.input, textarea, button {
+    outline: none;
 }
 
 </style>
